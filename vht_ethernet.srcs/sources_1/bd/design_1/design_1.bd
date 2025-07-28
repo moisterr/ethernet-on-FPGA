@@ -33,7 +33,8 @@
         "m00_couplers": {},
         "m01_couplers": {}
       },
-      "axi_ethernet_0": ""
+      "axi_ethernet_0": "",
+      "axi_ethernet_0_dma": ""
     },
     "interface_ports": {
       "ddr4_sdram_c1": {
@@ -185,16 +186,16 @@
           }
         },
         "interface_nets": {
-          "microblaze_0_ilmb": {
-            "interface_ports": [
-              "ILMB",
-              "ilmb_v10/LMB_M"
-            ]
-          },
           "microblaze_0_ilmb_cntlr": {
             "interface_ports": [
               "ilmb_bram_if_cntlr/BRAM_PORT",
               "lmb_bram/BRAM_PORTB"
+            ]
+          },
+          "microblaze_0_ilmb_bus": {
+            "interface_ports": [
+              "ilmb_v10/LMB_Sl_0",
+              "ilmb_bram_if_cntlr/SLMB"
             ]
           },
           "microblaze_0_dlmb": {
@@ -215,10 +216,10 @@
               "dlmb_bram_if_cntlr/SLMB"
             ]
           },
-          "microblaze_0_ilmb_bus": {
+          "microblaze_0_ilmb": {
             "interface_ports": [
-              "ilmb_v10/LMB_Sl_0",
-              "ilmb_bram_if_cntlr/SLMB"
+              "ILMB",
+              "ilmb_v10/LMB_M"
             ]
           }
         },
@@ -889,12 +890,6 @@
           }
         },
         "interface_nets": {
-          "m00_couplers_to_axi_interconnect_0": {
-            "interface_ports": [
-              "M00_AXI",
-              "m00_couplers/M_AXI"
-            ]
-          },
           "m01_couplers_to_axi_interconnect_0": {
             "interface_ports": [
               "M01_AXI",
@@ -905,6 +900,12 @@
             "interface_ports": [
               "xbar/M01_AXI",
               "m01_couplers/S_AXI"
+            ]
+          },
+          "m00_couplers_to_axi_interconnect_0": {
+            "interface_ports": [
+              "M00_AXI",
+              "m00_couplers/M_AXI"
             ]
           },
           "axi_interconnect_0_to_s00_couplers": {
@@ -1015,7 +1016,7 @@
                   "width": "32",
                   "usage": "register",
                   "bank_blocks": {
-                    "Memory Map for aximm_slave_decl;;xilinx.com:boundary:passthru:1.0;;;;": {
+                    "Memory Map for aximm_slave_decl;xilinx.com:boundary:passthru:1.0;register;;;;": {
                       "base_address": "0",
                       "range": "0",
                       "width": "32",
@@ -1045,6 +1046,24 @@
             }
           }
         }
+      },
+      "axi_ethernet_0_dma": {
+        "vlnv": "xilinx.com:ip:axi_dma:7.1",
+        "xci_name": "design_1_axi_ethernet_0_dma_0",
+        "parameters": {
+          "c_include_mm2s_dre": {
+            "value": "1"
+          },
+          "c_include_s2mm_dre": {
+            "value": "1"
+          },
+          "c_sg_length_width": {
+            "value": "16"
+          },
+          "c_sg_use_stsapp_length": {
+            "value": "1"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -1054,46 +1073,10 @@
           "axi_ethernet_0/lvds_clk"
         ]
       },
-      "microblaze_0_dlmb_1": {
-        "interface_ports": [
-          "microblaze_0/DLMB",
-          "microblaze_0_local_memory/DLMB"
-        ]
-      },
-      "ddr4_0_C0_DDR4": {
-        "interface_ports": [
-          "ddr4_sdram_c1",
-          "ddr4_0/C0_DDR4"
-        ]
-      },
-      "microblaze_0_M_AXI_DC": {
-        "interface_ports": [
-          "microblaze_0/M_AXI_DC",
-          "microblaze_0_axi_periph/S00_AXI"
-        ]
-      },
-      "default_250mhz_clk1_1": {
-        "interface_ports": [
-          "default_250mhz_clk1",
-          "ddr4_0/C0_SYS_CLK"
-        ]
-      },
       "microblaze_0_debug": {
         "interface_ports": [
           "mdm_1/MBDEBUG_0",
           "microblaze_0/DEBUG"
-        ]
-      },
-      "microblaze_0_axi_periph_M00_AXI": {
-        "interface_ports": [
-          "microblaze_0_axi_periph/M00_AXI",
-          "ddr4_0/C0_DDR4_S_AXI"
-        ]
-      },
-      "microblaze_0_M_AXI_IC": {
-        "interface_ports": [
-          "microblaze_0/M_AXI_IC",
-          "microblaze_0_axi_periph/S01_AXI"
         ]
       },
       "microblaze_0_ilmb_1": {
@@ -1114,6 +1097,48 @@
           "axi_uart16550_0/UART"
         ]
       },
+      "microblaze_0_dlmb_1": {
+        "interface_ports": [
+          "microblaze_0/DLMB",
+          "microblaze_0_local_memory/DLMB"
+        ]
+      },
+      "microblaze_0_M_AXI_DC": {
+        "interface_ports": [
+          "microblaze_0/M_AXI_DC",
+          "microblaze_0_axi_periph/S00_AXI"
+        ]
+      },
+      "default_250mhz_clk1_1": {
+        "interface_ports": [
+          "default_250mhz_clk1",
+          "ddr4_0/C0_SYS_CLK"
+        ]
+      },
+      "microblaze_0_axi_periph_M00_AXI": {
+        "interface_ports": [
+          "microblaze_0_axi_periph/M00_AXI",
+          "ddr4_0/C0_DDR4_S_AXI"
+        ]
+      },
+      "microblaze_0_M_AXI_IC": {
+        "interface_ports": [
+          "microblaze_0/M_AXI_IC",
+          "microblaze_0_axi_periph/S01_AXI"
+        ]
+      },
+      "ddr4_0_C0_DDR4": {
+        "interface_ports": [
+          "ddr4_sdram_c1",
+          "ddr4_0/C0_DDR4"
+        ]
+      },
+      "axi_ethernet_0_sgmii": {
+        "interface_ports": [
+          "sgmii_lvds",
+          "axi_ethernet_0/sgmii"
+        ]
+      },
       "microblaze_0_M_AXI_DP": {
         "interface_ports": [
           "microblaze_0/M_AXI_DP",
@@ -1132,10 +1157,28 @@
           "axi_ethernet_0/mdio"
         ]
       },
-      "axi_ethernet_0_sgmii": {
+      "axi_ethernet_0_m_axis_rxd": {
         "interface_ports": [
-          "sgmii_lvds",
-          "axi_ethernet_0/sgmii"
+          "axi_ethernet_0_dma/S_AXIS_S2MM",
+          "axi_ethernet_0/m_axis_rxd"
+        ]
+      },
+      "axi_ethernet_0_m_axis_rxs": {
+        "interface_ports": [
+          "axi_ethernet_0_dma/S_AXIS_STS",
+          "axi_ethernet_0/m_axis_rxs"
+        ]
+      },
+      "axi_ethernet_0_dma_M_AXIS_MM2S": {
+        "interface_ports": [
+          "axi_ethernet_0_dma/M_AXIS_MM2S",
+          "axi_ethernet_0/s_axis_txd"
+        ]
+      },
+      "axi_ethernet_0_dma_M_AXIS_CNTRL": {
+        "interface_ports": [
+          "axi_ethernet_0_dma/M_AXIS_CNTRL",
+          "axi_ethernet_0/s_axis_txc"
         ]
       }
     },
@@ -1215,6 +1258,37 @@
           "axi_ethernet_0/phy_rst_n",
           "phy_reset_out"
         ]
+      },
+      "Net": {
+        "ports": [
+          "axi_ethernet_0_dma/m_axi_mm2s_aclk",
+          "axi_ethernet_0_dma/m_axi_s2mm_aclk",
+          "axi_ethernet_0/axis_clk"
+        ]
+      },
+      "axi_ethernet_0_dma_mm2s_prmry_reset_out_n": {
+        "ports": [
+          "axi_ethernet_0_dma/mm2s_prmry_reset_out_n",
+          "axi_ethernet_0/axi_txd_arstn"
+        ]
+      },
+      "axi_ethernet_0_dma_mm2s_cntrl_reset_out_n": {
+        "ports": [
+          "axi_ethernet_0_dma/mm2s_cntrl_reset_out_n",
+          "axi_ethernet_0/axi_txc_arstn"
+        ]
+      },
+      "axi_ethernet_0_dma_s2mm_prmry_reset_out_n": {
+        "ports": [
+          "axi_ethernet_0_dma/s2mm_prmry_reset_out_n",
+          "axi_ethernet_0/axi_rxd_arstn"
+        ]
+      },
+      "axi_ethernet_0_dma_s2mm_sts_reset_out_n": {
+        "ports": [
+          "axi_ethernet_0_dma/s2mm_sts_reset_out_n",
+          "axi_ethernet_0/axi_rxs_arstn"
+        ]
       }
     },
     "addressing": {
@@ -1241,6 +1315,22 @@
                 "range": "16K"
               }
             }
+          }
+        }
+      },
+      "/axi_ethernet_0_dma": {
+        "address_spaces": {
+          "Data_SG": {
+            "range": "4G",
+            "width": "32"
+          },
+          "Data_MM2S": {
+            "range": "4G",
+            "width": "32"
+          },
+          "Data_S2MM": {
+            "range": "4G",
+            "width": "32"
           }
         }
       }
